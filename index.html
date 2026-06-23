@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="assets/pa-lounge (gold).svg">
+<title>Jyde Lounge — Lagos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --gold-pale: #F5E6B8;
+    --black: #0D0D0D;
+    --black-deep: #000000;
+    --black-card: #0D0D0D;
+    --black-border: #1A1A1A;
+    --white: #FAFAF8;
+    --muted: #6B6B6B;
+    --font-display: 'Inter', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
+
+  
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    
+  }
+
+  
+
+  /* Noise Texture Overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9997;
+    opacity: 0.4;
+  }
+
+  
+  /* Fix for mobile menu clipping */
+  body.menu-open { overflow: hidden; }
+  body.menu-open nav.scrolled { backdrop-filter: none; background: transparent; border-bottom: none; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 28px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.4s, padding 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(6,6,6,0.95);
+    backdrop-filter: blur(20px);
+    padding: 18px 60px;
+    border-bottom: 1px solid var(--black-border);
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(250,250,248,0.65);
+    text-decoration: none;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; left: 0; right: 0;
+    height: 1px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-cta {
+    padding: 10px 28px;
+    border-radius: 50px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+    font-family: var(--font-body);
+  }
+  .nav-cta:hover { background: var(--gold); color: var(--black); }
+
+  /* ─── HERO ─── */
+  .hero {
+    height: 100vh;
+    min-height: 700px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?w=1800&auto=format&fit=crop&q=80');
+    background-size: cover;
+    background-position: center 30%;
+  }
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,0.65) 0%, rgba(6,6,6,0.5) 50%, rgba(6,6,6,0.92) 100%),
+      radial-gradient(ellipse 60% 60% at 70% 40%, rgba(201,168,76,0.06) 0%, transparent 60%);
+  }
+  .hero-lines {
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(90deg, rgba(201,168,76,0.04) 0px, transparent 1px, transparent 80px),
+      repeating-linear-gradient(0deg, rgba(201,168,76,0.04) 0px, transparent 1px, transparent 80px);
+  }
+  .hero-content {
+    position: relative;
+    text-align: center;
+    z-index: 2;
+    padding: 0 20px;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-body);
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 1s 0.3s forwards;
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(64px, 10vw, 130px);
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+    opacity: 0;
+    animation: fadeUp 1s 0.5s forwards;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-title .num {
+    font-size: clamp(80px, 14vw, 180px);
+    line-height: 0.85;
+    display: block;
+  }
+  .hero-sub {
+    font-family: var(--font-body);
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    color: rgba(250,250,248,0.5);
+    margin-bottom: 56px;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 1s 0.7s forwards;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeUp 1s 0.9s forwards;
+  }
+  .btn-primary {
+    padding: 16px 48px;
+    border-radius: 50px;
+    background: var(--gold);
+    color: var(--black);
+    font-family: var(--font-body);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    border: none;
+    
+    text-decoration: none;
+    display: inline-block;
+    font-weight: 500;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .btn-outline {
+    padding: 16px 48px;
+    border-radius: 50px;
+    border: 1px solid rgba(201,168,76,0.4);
+    color: var(--gold);
+    font-family: var(--font-body);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .btn-outline:hover { border-color: var(--gold); background: rgba(201,168,76,0.06); }
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeIn 1s 1.4s forwards;
+  }
+  .hero-scroll span {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .scroll-line {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  .hero-tag {
+    position: absolute;
+    right: 60px;
+    bottom: 60px;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0;
+    animation: fadeIn 1s 1.6s forwards;
+  }
+
+  /* ─── MARQUEE ─── */
+  .marquee-strip {
+    border-top: 1px solid var(--black-border);
+    border-bottom: 1px solid var(--black-border);
+    padding: 18px 0;
+    overflow: hidden;
+    background: var(--black-card);
+  }
+  .marquee-inner {
+    display: flex;
+    gap: 80px;
+    animation: marquee 20s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee-item {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.7;
+    flex-shrink: 0;
+  }
+  .marquee-dot {
+    color: rgba(201,168,76,0.3);
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 120px 60px; }
+  .section-label {
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-label::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    display: inline-block;
+  }
+
+  /* ─── ABOUT ─── */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+  .about-visual {
+    position: relative;
+    height: 600px;
+  }
+  .about-img-main {
+    width: 75%;
+    height: 480px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    border: 1px solid var(--black-border);
+    overflow: hidden;
+    background: url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=900&auto=format&fit=crop&q=80') center/cover no-repeat;
+  }
+  .about-img-main::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 60%),
+                linear-gradient(to right, rgba(6,6,6,0.3) 0%, transparent 40%);
+  }
+  .about-img-accent {
+    width: 55%;
+    height: 240px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border: 1px solid var(--black-border);
+    z-index: 2;
+    overflow: hidden;
+    background: url('https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=700&auto=format&fit=crop&q=80') center/cover no-repeat;
+  }
+  .about-img-accent::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 70%),
+                linear-gradient(to right, rgba(6,6,6,0.25) 0%, transparent 50%);
+  }
+  .about-year {
+    position: absolute;
+    left: 0;
+    top: 40px;
+    font-family: var(--font-display);
+    font-size: 120px;
+    font-weight: 300;
+    line-height: 1;
+    color: rgba(201,168,76,0.08);
+    z-index: 0;
+  }
+  .about-title {
+    font-family: var(--font-display);
+    font-size: clamp(42px, 4vw, 60px);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 28px;
+  }
+  .about-title em { font-style: italic; color: var(--gold); }
+  .about-text {
+    font-size: 14px;
+    line-height: 1.9;
+    color: rgba(250,250,248,0.55);
+    margin-bottom: 40px;
+  }
+  .about-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--black-border);
+    margin-top: 48px;
+  }
+  .stat-item {
+    padding: 28px 24px;
+    border-right: 1px solid var(--black-border);
+    text-align: center;
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 42px;
+    font-weight: 300;
+    color: var(--gold);
+    display: block;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 6px;
+    display: block;
+  }
+
+  /* ─── EXPERIENCES ─── */
+  .experiences-section { background: var(--black-card); }
+  .experiences-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 80px;
+  }
+  .experiences-title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 4vw, 56px);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .experiences-title em { font-style: italic; color: var(--gold); }
+  .exp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--black-border);
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+  .exp-card {
+    background: var(--black);
+    padding: 56px 48px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.4s;
+  }
+  .exp-card:hover { background: #0A0802; }
+  .exp-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    transform: scaleX(0);
+    transition: transform 0.4s;
+  }
+  .exp-card:hover::before { transform: scaleX(1); }
+  .exp-num {
+    font-family: var(--font-display);
+    font-size: 80px;
+    font-weight: 300;
+    color: rgba(201,168,76,0.06);
+    line-height: 1;
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: color 0.4s;
+  }
+  .exp-card:hover .exp-num { color: rgba(201,168,76,0.12); }
+  .exp-icon {
+    width: 48px;
+    height: 48px;
+    border: 1px solid rgba(201,168,76,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 32px;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .exp-card:hover .exp-icon {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.08);
+  }
+  .exp-icon svg { width: 22px; height: 22px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+  .exp-name {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 400;
+    margin-bottom: 16px;
+    color: var(--white);
+  }
+  .exp-desc {
+    font-size: 13px;
+    line-height: 1.8;
+    color: rgba(250,250,248,0.45);
+  }
+  .exp-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 32px;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .exp-link::after {
+    content: '→';
+    font-size: 14px;
+  }
+  .exp-card:hover .exp-link { opacity: 1; transform: translateY(0); }
+
+  /* ─── MENU SECTION ─── */
+  .menu-section { max-width: 1300px; margin: 0 auto; }
+  .menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 64px;
+  }
+  .menu-title {
+    font-family: var(--font-display);
+    font-size: clamp(42px, 4vw, 58px);
+    font-weight: 300;
+    line-height: 1;
+  }
+  .menu-title em { font-style: italic; color: var(--gold); }
+  .menu-tabs {
+    display: flex;
+    gap: 4px;
+  }
+  .menu-tab {
+    padding: 10px 24px;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    
+    border: 1px solid transparent;
+    transition: all 0.3s;
+    background: none;
+    font-family: var(--font-body);
+  }
+  .menu-tab.active {
+    color: var(--gold);
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.05);
+  }
+  .menu-tab:hover { color: var(--gold-light); }
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--black-border);
+  }
+  .menu-item {
+    background: var(--black-card);
+    padding: 36px 28px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+    display: flex;
+    flex-direction: column;
+  }
+  .menu-item:hover { background: #0C0A04; }
+  .menu-item-img {
+    width: 100%;
+    aspect-ratio: 1;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+    background: #0a0802;
+  }
+  .menu-item-img img { transition: transform 0.5s ease; }
+  .menu-item:hover .menu-item-img img { transform: scale(1.06); }
+  .menu-item-name {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 8px;
+    color: var(--white);
+  }
+  .menu-item-desc {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.7;
+    flex: 1;
+    margin-bottom: 20px;
+  }
+  .menu-item-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .menu-price {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--gold);
+  }
+  .menu-add {
+    width: 32px; height: 32px;
+    border: 1px solid rgba(201,168,76,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    color: var(--gold);
+    font-size: 20px;
+    transition: all 0.3s;
+    background: none;
+    line-height: 1;
+  }
+  .menu-item:hover .menu-add {
+    background: var(--gold);
+    color: var(--black);
+    border-color: var(--gold);
+  }
+
+  /* ─── RESERVATION ─── */
+  .reservation-section {
+    background: var(--black-card);
+    position: relative;
+    overflow: hidden;
+  }
+  .reservation-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 50% 80% at 80% 50%, rgba(201,168,76,0.06) 0%, transparent 60%),
+      repeating-linear-gradient(90deg, rgba(201,168,76,0.02) 0px, transparent 1px, transparent 60px),
+      repeating-linear-gradient(0deg, rgba(201,168,76,0.02) 0px, transparent 1px, transparent 60px);
+  }
+  .reservation-inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: center;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+  .reservation-text .section-label { justify-content: flex-start; }
+  .reservation-title {
+    font-family: var(--font-display);
+    font-size: clamp(42px, 4vw, 60px);
+    font-weight: 300;
+    line-height: 1.05;
+    margin-bottom: 24px;
+  }
+  .reservation-title em { font-style: italic; color: var(--gold); }
+  .reservation-desc {
+    font-size: 14px;
+    line-height: 1.9;
+    color: rgba(250,250,248,0.5);
+    margin-bottom: 40px;
+  }
+  .info-items { display: flex; flex-direction: column; gap: 20px; }
+  .info-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .info-icon {
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(201,168,76,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .info-icon svg { width: 16px; height: 16px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+  .info-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .info-value {
+    font-size: 13px;
+    color: var(--white);
+    line-height: 1.5;
+  }
+  .res-form {
+    background: rgba(0,0,0,0.5);
+    border: 1px solid var(--black-border);
+    padding: 52px 44px;
+  }
+  .form-title {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 300;
+    margin-bottom: 36px;
+    color: var(--white);
+  }
+  .form-title em { font-style: italic; color: var(--gold); }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .form-group {
+    margin-bottom: 20px;
+  }
+  .form-group label {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--black-border);
+    border-bottom-color: rgba(201,168,76,0.2);
+    color: var(--white);
+    padding: 14px 0;
+    font-family: var(--font-body);
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.3s;
+    border-radius: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-bottom-color: var(--gold);
+    background: rgba(201,168,76,0.03);
+  }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: rgba(255,255,255,0.2); }
+  .form-group select option { background: #0D0D0D; }
+  .form-group textarea { resize: none; min-height: 80px; }
+  .form-submit {
+    width: 100%;
+    padding: 18px;
+    background: var(--gold);
+    color: var(--black);
+    font-family: var(--font-body);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: 500;
+    border: none;
+    
+    margin-top: 8px;
+    transition: background 0.3s;
+  }
+  .form-submit:hover { background: var(--gold-light); }
+
+  /* ─── INSTAGRAM / GALLERY ─── */
+  .gallery-section { padding: 100px 0; }
+  .gallery-header {
+    text-align: center;
+    padding: 0 60px;
+    margin-bottom: 60px;
+  }
+  .gallery-title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 4vw, 54px);
+    font-weight: 300;
+    margin-bottom: 12px;
+  }
+  .gallery-title em { font-style: italic; color: var(--gold); }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 2px;
+  }
+  .gallery-cell {
+    aspect-ratio: 1;
+    background: var(--black-card);
+    position: relative;
+    overflow: hidden;
+  }
+  .gallery-cell-inner {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #131005, #0A0802);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s;
+  }
+  .gallery-cell:hover .gallery-cell-inner { transform: scale(1.05); }
+  .gallery-cell::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(201,168,76,0.0);
+    transition: background 0.3s;
+    z-index: 2;
+  }
+  .gallery-cell:hover::after { background: rgba(201,168,76,0.08); }
+  .gallery-cell.large { grid-column: span 2; grid-row: span 2; }
+  .gallery-glyph {
+    font-size: 24px;
+    opacity: 0.08;
+    color: var(--gold);
+    font-family: var(--font-display);
+  }
+  .ig-btn {
+    display: block;
+    text-align: center;
+    margin: 48px auto 0;
+    padding: 14px 48px;
+    border: 1px solid rgba(201,168,76,0.35);
+    color: var(--gold);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+    width: fit-content;
+    font-family: var(--font-body);
+  }
+  .ig-btn:hover { background: rgba(201,168,76,0.08); border-color: var(--gold); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid var(--black-border);
+    padding: 80px 60px 40px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 80px;
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .footer-brand-name {
+    font-family: var(--font-display);
+    font-size: 38px;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+  .footer-brand-name span { color: var(--gold); }
+  .footer-tagline {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+  .footer-about {
+    font-size: 13px;
+    line-height: 1.8;
+    color: rgba(250,250,248,0.4);
+    margin-bottom: 32px;
+  }
+  .footer-social {
+    display: flex;
+    gap: 12px;
+  }
+  .footer-social a {
+    width: 36px; height: 36px;
+    border: 1px solid var(--black-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 12px;
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .footer-social a:hover { border-color: var(--gold); color: var(--gold); }
+  .footer-col-title {
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--black-border);
+  }
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    list-style: none;
+  }
+  .footer-links a {
+    font-size: 13px;
+    color: rgba(250,250,248,0.45);
+    text-decoration: none;
+    transition: color 0.3s;
+    letter-spacing: 0.03em;
+  }
+  .footer-links a:hover { color: var(--gold); }
+  .opening-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 12px;
+  }
+  .opening-day { color: rgba(250,250,248,0.45); }
+  .opening-time { color: var(--gold); font-weight: 300; }
+  .footer-bottom {
+    border-top: 1px solid var(--black-border);
+    padding-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+  .footer-copy {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+  .footer-legal {
+    display: flex;
+    gap: 28px;
+  }
+  .footer-legal a {
+    font-size: 11px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s;
+    letter-spacing: 0.05em;
+  }
+  .footer-legal a:hover { color: var(--gold); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+    50% { opacity: 0.4; transform: scaleY(0.6); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Mobile hamburger */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    
+    padding: 4px;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  @media (max-width: 1024px) {
+    section { padding: 80px 30px; }
+    nav { padding: 24px 30px; }
+    nav.scrolled { padding: 16px 30px; }
+    .about { grid-template-columns: 1fr; gap: 60px; }
+    .about-visual { height: 350px; }
+    .exp-grid { grid-template-columns: 1fr 1fr; }
+    .menu-grid { grid-template-columns: repeat(2, 1fr); }
+    .menu-header { flex-direction: column; align-items: flex-start; gap: 24px; }
+    .reservation-inner { grid-template-columns: 1fr; gap: 60px; }
+    .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+    .gallery-cell.large { grid-column: span 1; grid-row: span 1; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .nav-links {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(6,6,6,0.98);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      z-index: 90;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      display: flex;
+    }
+    .nav-links.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .nav-links li a { font-size: 24px; }
+    .mobile-only-cta { display: block !important; }
+    .nav-hamburger { z-index: 100; cursor: pointer; transition: transform 0.3s; }
+    .nav-hamburger.active span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-hamburger.active span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.active span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    .nav-hamburger span { transition: all 0.3s ease; }
+    .nav-hamburger { display: flex; }
+  }
+
+  @media (max-width: 600px) {
+    /* Optimize Text Sizes */
+    .hero-title { font-size: 40px; }
+    .hero-title .num { font-size: 60px; }
+    .hero-sub { font-size: 14px; }
+    .hero-tag { display: none; }
+    .about-title { font-size: 32px; line-height:1.2; }
+    .experiences-title { font-size: 32px; line-height:1.2; }
+    .reservation-title { font-size: 32px; line-height:1.2; }
+    .gallery-title { font-size: 32px; line-height:1.2; }
+    
+    /* Optimize Image/Container Sizes */
+    .about-visual { display: none; }
+    .about-stats { grid-template-columns: 1fr; }
+    .stat-item { border-right: none; border-bottom: 1px solid var(--black-border); padding: 20px; }
+    .stat-item:last-child { border-bottom: none; }
+    #navbar > .nav-cta { display: none; }
+    .exp-card { padding: 32px 24px; }
+    .gallery-section { padding: 60px 0; }
+    .gallery-header { margin-bottom: 30px; }
+    
+    .exp-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+    .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+    section { padding: 50px 16px; }
+    nav { padding: 16px; }
+    
+    /* Buttons */
+    .btn-primary, .btn-outline { padding: 12px 24px; font-size: 9px; }
+  }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+
+
+<!-- ─── NAV ─── -->
+<nav id="navbar">
+  <a href="#" class="nav-logo" style="display:flex; align-items:center; gap:12px;"><img src="assets/pa-lounge (gold).svg" alt="Jyde Lounge" style="height: 36px; display: block;">Jyde's<span>Lounge</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experiences">Experiences</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li class="mobile-only-cta" style="display:none; margin-top:20px;"><a href="#reservation" class="nav-cta" style="display:inline-block;">Reserve a Table</a></li>
+  </ul>
+  <a href="#reservation" class="nav-cta">Reserve a Table</a>
+  <div class="nav-hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Est. 2026 · Lagos, Nigeria</p>
+    <h1 class="hero-title">
+      <em>Jyde's</em>
+      <span class="num" style="font-size: clamp(60px, 10vw, 120px);">Lounge</span>
+    </h1>
+    <p class="hero-sub">Where World Class Cuisine Meets Nightlife</p>
+    <div class="hero-actions">
+      <a href="#reservation" class="btn-primary">Book a Table</a>
+      <a href="#menu" class="btn-outline">Explore Menu</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+  <div class="hero-tag">22 Itire Road, Municipal bus stop Lawanson, suruelere Lagos.</div>
+</section>
+
+<!-- ─── MARQUEE ─── -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span class="marquee-item">Fine Dining</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Cocktail Bar</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Live Music</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Night Club</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Private Events</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Lagos Since 2026</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Fine Dining</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Cocktail Bar</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Live Music</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Night Club</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Private Events</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Lagos Since 2010</span>
+    <span class="marquee-dot">✦</span>
+  </div>
+</div>
+
+<!-- ─── ABOUT ─── -->
+<section id="about">
+  <div class="about">
+    <div class="about-visual reveal">
+      <div class="about-year">2026</div>
+      <div class="about-img-main"></div>
+      <div class="about-img-accent"></div>
+    </div>
+    <div class="reveal" style="transition-delay: 0.15s">
+      <div class="section-label">Our Story</div>
+      <h2 class="about-title">Where Every Evening<br>Becomes <em>Extraordinary</em></h2>
+      <p class="about-text">
+        Since 2010, Jyde Lounge has defined the pinnacle of Lagos nightlife — a sanctuary where impeccable cuisine, expertly crafted cocktails, and an electric atmosphere converge. Our commitment is unwavering: to deliver experiences that linger in memory long after the night ends.
+      </p>
+      <p class="about-text">
+        Nestled in the heart of Surulere, we have hosted Lagos's finest — celebrating milestones, forging connections, and creating moments that define a generation.
+      </p>
+      <a href="#experiences" class="btn-outline">Discover More</a>
+      <div class="about-stats">
+        <div class="stat-item">
+          <span class="stat-num">15+</span>
+          <span class="stat-label">Years of Excellence</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">50K+</span>
+          <span class="stat-label">Happy Guests</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">200+</span>
+          <span class="stat-label">Menu Items</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── EXPERIENCES ─── -->
+<section class="experiences-section" id="experiences">
+  <div class="experiences-header reveal">
+    <div class="section-label" style="justify-content:center">What We Offer</div>
+    <h2 class="experiences-title">Curated <em>Experiences</em><br>Like No Other</h2>
+  </div>
+  <div class="exp-grid">
+    <div class="exp-card reveal">
+      <span class="exp-num">01</span>
+      <div class="exp-icon">
+        <svg viewBox="0 0 24 24"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+      </div>
+      <h3 class="exp-name">Tasty Menu</h3>
+      <p class="exp-desc">An ever-evolving selection of Nigerian and international cuisine, prepared with the finest ingredients and served with meticulous care.</p>
+      <a href="#menu" class="exp-link">View Menu</a>
+    </div>
+    <div class="exp-card reveal" style="transition-delay:0.1s">
+      <span class="exp-num">02</span>
+      <div class="exp-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+      </div>
+      <h3 class="exp-name">Nightlife</h3>
+      <p class="exp-desc">Fused with exotic, opulent décor and pulsating rhythms — our dance floor is Lagos's most sought-after destination after dark.</p>
+      <a href="#" class="exp-link">Learn More</a>
+    </div>
+    <div class="exp-card reveal" style="transition-delay:0.2s">
+      <span class="exp-num">03</span>
+      <div class="exp-icon">
+        <svg viewBox="0 0 24 24"><path d="M8 22H5a2 2 0 01-2-2V6l3-3h13a2 2 0 012 2v4"/><path d="M8 22V6M3 9h5"/><path d="M16 16c0 2.5-2 4-4 4"/><circle cx="18" cy="18" r="4"/><path d="M18 16v2l1 1"/></svg>
+      </div>
+      <h3 class="exp-name">Drinks & Bar</h3>
+      <p class="exp-desc">Creating good mood with a world-class selection of spirits, wines, and signature cocktails crafted by our master mixologists.</p>
+      <a href="#menu" class="exp-link">View Drinks</a>
+    </div>
+    <div class="exp-card reveal" style="transition-delay:0.05s">
+      <span class="exp-num">04</span>
+      <div class="exp-icon">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </div>
+      <h3 class="exp-name">Private Events</h3>
+      <p class="exp-desc">Transform any occasion into an unforgettable celebration with our bespoke event planning services and dedicated team.</p>
+      <a href="#reservation" class="exp-link">Book an Event</a>
+    </div>
+    <div class="exp-card reveal" style="transition-delay:0.15s">
+      <span class="exp-num">05</span>
+      <div class="exp-icon">
+        <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+      </div>
+      <h3 class="exp-name">Live Entertainment</h3>
+      <p class="exp-desc">From intimate acoustic sets to DJ nights that set the city on fire — our entertainment calendar is always captivating.</p>
+      <a href="#" class="exp-link">See Events</a>
+    </div>
+    <div class="exp-card reveal" style="transition-delay:0.25s">
+      <span class="exp-num">06</span>
+      <div class="exp-icon">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+      </div>
+      <h3 class="exp-name">VIP Service</h3>
+      <p class="exp-desc">Indulge in our VIP lounge experience — premium bottle service, dedicated hosts, and exclusive access to our finest spaces.</p>
+      <a href="#reservation" class="exp-link">Book VIP</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── RESERVATION ─── -->
+<section class="reservation-section" id="reservation">
+  <div class="reservation-inner">
+    <div class="reservation-text reveal">
+      <div class="section-label">Reservations</div>
+      <h2 class="reservation-title">Secure Your<br><em>Perfect Evening</em></h2>
+      <p class="reservation-desc">
+        Whether it's an intimate dinner for two, a corporate gathering, or a night of pure celebration — we craft every visit with care. Reserve your table or book an event with us today.
+      </p>
+      <div class="info-items">
+        <div class="info-item">
+          <div class="info-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="info-label">Address</div>
+            <div class="info-value">22 Itire Road, Municipal bus stop Lawanson<br>Surulere, Lagos.</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.08 2.18 2 2 0 012.06 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.29 7.64a16 16 0 006.07 6.07l1-1a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="info-label">Phone</div>
+            <div class="info-value">07025883461 · 02013411</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+          </div>
+          <div>
+            <div class="info-label">Hours</div>
+            <div class="info-value">Mon – Sat: 5PM – Late<br>Sunday: 2PM – Late</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <form class="res-form reveal" style="transition-delay:0.15s" id="reservationForm">
+      <h3 class="form-title">Make a <em>Reservation</em></h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" id="resFirstName" name="first_name" required placeholder="Adebayo">
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" id="resLastName" name="last_name" required placeholder="Okafor">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="resEmail" name="email" required placeholder="you@example.com">
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="tel" id="resPhone" name="phone" required placeholder="+234 000 000 0000">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date" id="resDate" name="date" required>
+        </div>
+        <div class="form-group">
+          <label>Time</label>
+          <select id="resTime" name="time" required>
+            <option>5:00 PM</option>
+            <option>6:00 PM</option>
+            <option>7:00 PM</option>
+            <option>8:00 PM</option>
+            <option>9:00 PM</option>
+            <option>10:00 PM</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Guests</label>
+          <select id="resGuests" name="guests" required>
+            <option>1 Guest</option>
+            <option>2 Guests</option>
+            <option>3–5 Guests</option>
+            <option>6–10 Guests</option>
+            <option>10+ Guests</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Occasion</label>
+          <select id="resOccasion" name="occasion" required>
+            <option>Regular Dining</option>
+            <option>Birthday</option>
+            <option>Anniversary</option>
+            <option>Corporate Event</option>
+            <option>Private Party</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Special Requests</label>
+        <textarea id="resRequests" name="special_requests" placeholder="Dietary requirements, table preference..."></textarea>
+      </div>
+      <button type="submit" class="form-submit" id="resSubmitBtn">Confirm Reservation</button>
+      <div id="resSuccessMessage" style="display:none; color:var(--gold); margin-top:20px; font-size:14px; text-align:center;">Reservation submitted successfully!</div>
+    </form>
+  </div>
+</section>
+
+<!-- ─── GALLERY ─── -->
+<section class="gallery-section" id="gallery">
+  <div class="gallery-header reveal">
+    <div class="section-label" style="justify-content:center">Gallery</div>
+    <h2 class="gallery-title">Moments of <em>Magic</em></h2>
+    <p style="font-size:13px; color:var(--muted); letter-spacing:0.05em; margin-top:8px;">Follow us on Instagram for the latest</p>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-cell large"><div class="gallery-cell-inner" style="background:none"><img src="https://images.unsplash.com/photo-1545128485-c400e7702796?w=800&auto=format&fit=crop&q=80" alt="Lounge" style="width:100%;height:100%;object-fit:cover;display:block;filter:brightness(0.85)"></div></div>
+    <div class="gallery-cell"><div class="gallery-cell-inner" style="background:none"><img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=500&auto=format&fit=crop&q=80" alt="Cocktails" style="width:100%;height:100%;object-fit:cover;display:block;filter:brightness(0.85)"></div></div>
+    <div class="gallery-cell"><div class="gallery-cell-inner" style="background:none"><img src="https://images.unsplash.com/photo-1571204829887-3b8d69e4094d?w=500&auto=format&fit=crop&q=80" alt="Bar" style="width:100%;height:100%;object-fit:cover;display:block;filter:brightness(0.85)"></div></div>
+    <div class="gallery-cell"><div class="gallery-cell-inner" style="background:none"><img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=500&auto=format&fit=crop&q=80" alt="Nightclub" style="width:100%;height:100%;object-fit:cover;display:block;filter:brightness(0.85)"></div></div>
+    <div class="gallery-cell"><div class="gallery-cell-inner" style="background:none"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&auto=format&fit=crop&q=80" alt="Food" style="width:100%;height:100%;object-fit:cover;display:block;filter:brightness(0.85)"></div></div>
+    <div class="gallery-cell"><div class="gallery-cell-inner" style="background:none"><img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=500&auto=format&fit=crop&q=80" alt="Drinks" style="width:100%;height:100%;object-fit:cover;display:block;filter:brightness(0.85)"></div></div>
+    <div class="gallery-cell"><div class="gallery-cell-inner" style="background:none"><img src="https://images.unsplash.com/photo-1541614101331-1a5a3a194e92?w=500&auto=format&fit=crop&q=80" alt="DJ" style="width:100%;height:100%;object-fit:cover;display:block;filter:brightness(0.85)"></div></div>
+    <div class="gallery-cell large" style="grid-column:4/span 2; grid-row:2/span 2"><div class="gallery-cell-inner" style="background:none"><img src="https://images.unsplash.com/photo-1529543544282-ea669407fca3?w=800&auto=format&fit=crop&q=80" alt="Lounge Interior" style="width:100%;height:100%;object-fit:cover;display:block;filter:brightness(0.85)"></div></div>
+    <div class="gallery-cell"><div class="gallery-cell-inner" style="background:none"><img src="https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=500&auto=format&fit=crop&q=80" alt="Wine" style="width:100%;height:100%;object-fit:cover;display:block;filter:brightness(0.85)"></div></div>
+    <div class="gallery-cell"><div class="gallery-cell-inner" style="background:none"><img src="https://images.unsplash.com/photo-1525268323446-0505b6fe7778?w=500&auto=format&fit=crop&q=80" alt="Party" style="width:100%;height:100%;object-fit:cover;display:block;filter:brightness(0.85)"></div></div>
+  </div>
+  <div style="padding:0 60px">
+    <a href="https://instagram.com" target="_blank" class="ig-btn">Follow on Instagram @jydelounge</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-name" style="display:flex; align-items:center; gap:12px; margin-bottom:12px;"><img src="assets/pa-lounge (gold).svg" alt="Jyde Lounge" style="height: 42px; display: block;">Jyde's<span>Lounge</span></div>
+      <div class="footer-tagline">Restaurant · Lounge · Bar · Nightclub</div>
+      <p class="footer-about">
+        Come sit by our cozy restaurant, lounge and bar where we serve up a delicious menu that includes our notable cocktail selection, all you can eat. We also offer delivery.
+      </p>
+      <div class="footer-social">
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Instagram">in</a>
+        <a href="#" title="Twitter">tw</a>
+        <a href="#" title="YouTube">yt</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Quick Links</div>
+      <ul class="footer-links">
+        <li><a href="#about">About Us</a></li>
+            <li><a href="#experiences">Events</a></li>
+        <li><a href="#reservation">Reservation</a></li>
+        <li><a href="#">Our Services</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Opening Times</div>
+      <div class="opening-item"><span class="opening-day">Monday</span><span class="opening-time">5PM</span></div>
+      <div class="opening-item"><span class="opening-day">Tuesday</span><span class="opening-time">5PM</span></div>
+      <div class="opening-item"><span class="opening-day">Wednesday</span><span class="opening-time">5PM</span></div>
+      <div class="opening-item"><span class="opening-day">Thursday</span><span class="opening-time">5PM</span></div>
+      <div class="opening-item"><span class="opening-day">Friday</span><span class="opening-time">5PM</span></div>
+      <div class="opening-item"><span class="opening-day">Saturday</span><span class="opening-time">5PM</span></div>
+      <div class="opening-item"><span class="opening-day">Sunday</span><span class="opening-time">2PM</span></div>
+    </div>
+    <div>
+      <div class="footer-col-title">Newsletter</div>
+      <p style="font-size:13px; color:var(--muted); line-height:1.8; margin-bottom:20px;">Subscribe and receive 10% off your next order.</p>
+      <div>
+        <input type="email" placeholder="Your email address" style="width:100%; background:rgba(255,255,255,0.03); border:1px solid var(--black-border); border-bottom-color:rgba(201,168,76,0.3); color:var(--white); padding:14px 0; font-family:var(--font-body); font-size:13px; outline:none; margin-bottom:12px;">
+        <button onclick="this.textContent='Subscribed ✦'; this.style.background='#0a0802'; this.style.color='var(--gold)'; this.style.border='1px solid var(--gold)'" style="width:100%; padding:14px; background:var(--gold); color:var(--black); font-family:var(--font-body); font-size:10px; letter-spacing:0.2em; text-transform:uppercase; border:none; cursor:pointer; transition:background 0.3s; font-weight:500;">Subscribe</button>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Jyde Lounge. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="#">Terms & Conditions</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  
+
+
+  // Hamburger menu logic
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.querySelector('.nav-links');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('active');
+    document.body.classList.toggle('menu-open');
+  });
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      navLinks.classList.remove('active');
+      document.body.classList.remove('menu-open');
+    });
+  });
+
+  // Navbar scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+  reveals.forEach(r => observer.observe(r));
+
+
+  // Supabase Reservation Logic
+  const resForm = document.getElementById('reservationForm');
+  const resSuccessMsg = document.getElementById('resSuccessMessage');
+  const resSubmitBtn = document.getElementById('resSubmitBtn');
+  
+  // NOTE: Replace these with your actual keys
+  const supabaseUrl = 'https://tkgyqbbryewvixykpqtl.supabase.co';
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRrZ3lxYmJyeWV3dml4eWtwcXRsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0NjExNTksImV4cCI6MjA5NzAzNzE1OX0.xyFFu5jteZuaFLw218nSbL0nfoaxYA8FTxh_8sDEF6k';
+  const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+  if(resForm) {
+    resForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const firstName = document.getElementById('resFirstName').value;
+      const lastName = document.getElementById('resLastName').value;
+      const email = document.getElementById('resEmail').value;
+      const phone = document.getElementById('resPhone').value;
+      const date = document.getElementById('resDate').value;
+      const time = document.getElementById('resTime').value;
+      const guests = document.getElementById('resGuests').value;
+      const occasion = document.getElementById('resOccasion').value;
+      const requests = document.getElementById('resRequests').value;
+      
+      resSubmitBtn.textContent = "Submitting...";
+      resSubmitBtn.style.opacity = '0.7';
+      resSubmitBtn.disabled = true;
+
+
+      const formspreeResUrl = 'https://formspree.io/f/xdavyddd';
+      const resFormData = new FormData(resForm);
+      try {
+        await fetch(formspreeResUrl, {
+          method: 'POST',
+          body: resFormData,
+          headers: { 'Accept': 'application/json' }
+        });
+      } catch (err) {
+        console.error('Formspree error:', err);
+      }
+
+      const { data, error } = await supabaseClient
+        .from('reservations')
+        .insert([
+          { 
+            first_name: firstName, 
+            last_name: lastName, 
+            email: email, 
+            phone: phone, 
+            date: date,
+            time: time,
+            guests: guests,
+            occasion: occasion,
+            special_requests: requests
+          }
+        ]);
+
+      if (error) {
+        console.error('Error saving reservation:', error);
+        showModal('There was an error submitting your reservation. Please try again.');
+        resSubmitBtn.textContent = "Confirm Reservation";
+        resSubmitBtn.style.opacity = '1';
+        resSubmitBtn.disabled = false;
+      } else {
+        resForm.reset();
+        resSuccessMsg.style.display = 'block';
+        resSubmitBtn.style.display = 'none';
+      }
+    });
+  }
+
+</script>
+
+<div id="customModal" style="display:none; position:fixed; z-index:9999; inset:0; background:rgba(0,0,0,0.8); align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(5px);">
+  <div style="background:var(--black-card); border:1px solid var(--gold); padding:40px; max-width:400px; width:100%; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+    <p id="customModalMsg" style="color:var(--white); font-size:16px; margin-bottom:24px; line-height:1.5; font-family:var(--font-body);"></p>
+    <button onclick="document.getElementById('customModal').style.display='none'" style="padding:12px 32px; background:var(--gold); border:none; color:var(--black); font-family:var(--font-body); font-size:11px; letter-spacing:0.2em; text-transform:uppercase; cursor:pointer; font-weight:500; transition:background 0.3s;" onmouseover="this.style.background='var(--gold-light)'" onmouseout="this.style.background='var(--gold)'">Close</button>
+  </div>
+</div>
+<script>
+  function showModal(msg) {
+    document.getElementById('customModalMsg').textContent = msg;
+    document.getElementById('customModal').style.display = 'flex';
+  }
+</script>
+</body>
+</html>
