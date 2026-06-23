@@ -770,7 +770,7 @@
     text-transform: uppercase;
     font-weight: 500;
     border: none;
-    
+    border-radius: 50px;
     margin-top: 8px;
     transition: background 0.3s;
   }
@@ -841,6 +841,7 @@
     transition: all 0.3s;
     width: fit-content;
     font-family: var(--font-body);
+    border-radius: 50px;
   }
   .ig-btn:hover { background: rgba(201,168,76,0.08); border-color: var(--gold); }
 
@@ -1421,7 +1422,7 @@
       <p style="font-size:13px; color:var(--muted); line-height:1.8; margin-bottom:20px;">Subscribe and receive 10% off your next order.</p>
       <div>
         <input type="email" placeholder="Your email address" style="width:100%; background:rgba(255,255,255,0.03); border:1px solid var(--black-border); border-bottom-color:rgba(201,168,76,0.3); color:var(--white); padding:14px 0; font-family:var(--font-body); font-size:13px; outline:none; margin-bottom:12px;">
-        <button onclick="this.textContent='Subscribed ✦'; this.style.background='#0a0802'; this.style.color='var(--gold)'; this.style.border='1px solid var(--gold)'" style="width:100%; padding:14px; background:var(--gold); color:var(--black); font-family:var(--font-body); font-size:10px; letter-spacing:0.2em; text-transform:uppercase; border:none; cursor:pointer; transition:background 0.3s; font-weight:500;">Subscribe</button>
+        <button onclick="this.textContent='Subscribed ✦'; this.style.background='#0a0802'; this.style.color='var(--gold)'; this.style.border='1px solid var(--gold)'" style="width:100%; padding:14px; background:var(--gold); color:var(--black); font-family:var(--font-body); font-size:10px; letter-spacing:0.2em; text-transform:uppercase; border:none; border-radius:50px; cursor:pointer; transition:background 0.3s; font-weight:500;">Subscribe</button>
       </div>
     </div>
   </div>
@@ -1546,7 +1547,7 @@
 <div id="customModal" style="display:none; position:fixed; z-index:9999; inset:0; background:rgba(0,0,0,0.8); align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(5px);">
   <div style="background:var(--black-card); border:1px solid var(--gold); padding:40px; max-width:400px; width:100%; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
     <p id="customModalMsg" style="color:var(--white); font-size:16px; margin-bottom:24px; line-height:1.5; font-family:var(--font-body);"></p>
-    <button onclick="document.getElementById('customModal').style.display='none'" style="padding:12px 32px; background:var(--gold); border:none; color:var(--black); font-family:var(--font-body); font-size:11px; letter-spacing:0.2em; text-transform:uppercase; cursor:pointer; font-weight:500; transition:background 0.3s;" onmouseover="this.style.background='var(--gold-light)'" onmouseout="this.style.background='var(--gold)'">Close</button>
+    <button onclick="document.getElementById('customModal').style.display='none'" style="padding:12px 32px; background:var(--gold); border:none; border-radius:50px; color:var(--black); font-family:var(--font-body); font-size:11px; letter-spacing:0.2em; text-transform:uppercase; cursor:pointer; font-weight:500; transition:background 0.3s;" onmouseover="this.style.background='var(--gold-light)'" onmouseout="this.style.background='var(--gold)'">Close</button>
   </div>
 </div>
 <script>
