@@ -841,17 +841,19 @@
     transition: transform 0.5s ease;
   }
   .carousel-slide {
-    min-width: 100%;
+    flex: 0 0 100%;
     aspect-ratio: 16 / 9;
     background: var(--black-card);
     overflow: hidden;
+    position: relative;
   }
   .carousel-slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
     filter: brightness(0.85);
+    transform: rotate(-90deg);
   }
   .carousel-btn {
     position: absolute;
@@ -1425,9 +1427,9 @@
   <div class="carousel">
     <div class="carousel-track">
       <div class="carousel-slide"><img src="assets/IMG_4969.JPG" alt="PA Lounge" loading="lazy"></div>
-      <div class="carousel-slide"><img src="assets/IMG_4970.JPG" alt="PA Lounge" loading="lazy"></div>
-      <div class="carousel-slide"><img src="assets/IMG_4987.JPG" alt="PA Lounge" loading="lazy"></div>
-      <div class="carousel-slide"><img src="assets/IMG_5001.JPG" alt="PA Lounge" loading="lazy"></div>
+      <div class="carousel-slide"><img src="assets/IMG_5084.JPG" alt="PA Lounge" loading="lazy"></div>
+      <div class="carousel-slide"><img src="assets/IMG_5092.JPG" alt="PA Lounge" loading="lazy"></div>
+      <div class="carousel-slide"><img src="assets/IMG_5070.JPG" alt="PA Lounge" loading="lazy"></div>
     </div>
     <button class="carousel-btn prev" aria-label="Previous">&#10094;</button>
     <button class="carousel-btn next" aria-label="Next">&#10095;</button>
