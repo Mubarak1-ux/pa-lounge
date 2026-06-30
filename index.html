@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="assets/pa-lounge (gold).svg">
-<title>Jyde Lounge — Lagos</title>
+<title>Jyde Lounge | Lagos</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -429,20 +429,44 @@
   }
 
   /* ─── EXPERIENCES ─── */
-  .experiences-section { background: var(--black-card); }
+  .experiences-section {
+    background: var(--black-card);
+    position: relative;
+    overflow: hidden;
+  }
+  .experiences-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at 30% 20%, rgba(201,168,76,0.03) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 80%, rgba(201,168,76,0.02) 0%, transparent 50%);
+    pointer-events: none;
+  }
   .experiences-header {
     text-align: center;
-    max-width: 600px;
+    max-width: 700px;
     margin: 0 auto 80px;
+    position: relative;
   }
   .experiences-title {
     font-family: var(--font-display);
     font-size: clamp(40px, 4vw, 56px);
     font-weight: 300;
-    line-height: 1.1;
-    margin-bottom: 16px;
+    line-height: 1.15;
+    margin-bottom: 20px;
   }
   .experiences-title em { font-style: italic; color: var(--gold); }
+  .exp-sub {
+    font-size: 14px;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+    line-height: 1.7;
+    max-width: 520px;
+    margin: 0 auto;
+  }
   .exp-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -450,83 +474,97 @@
     background: var(--black-border);
     max-width: 1300px;
     margin: 0 auto;
+    position: relative;
   }
   .exp-card {
     background: var(--black);
-    padding: 56px 48px;
+    padding: 56px 44px;
     position: relative;
     overflow: hidden;
     transition: background 0.4s;
+    display: flex;
+    flex-direction: column;
   }
   .exp-card:hover { background: #0A0802; }
   .exp-card::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    transform: scaleX(0);
-    transition: transform 0.4s;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(201,168,76,0.03) 0%, transparent 40%);
+    opacity: 0;
+    transition: opacity 0.4s;
   }
-  .exp-card:hover::before { transform: scaleX(1); }
-  .exp-num {
-    font-family: var(--font-display);
-    font-size: 80px;
-    font-weight: 300;
-    color: rgba(201,168,76,0.06);
-    line-height: 1;
+  .exp-card:hover::before { opacity: 1; }
+  .exp-card::after {
+    content: '';
     position: absolute;
-    top: 20px;
-    right: 30px;
-    transition: color 0.4s;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.15), transparent);
+    transform: scaleX(0);
+    transition: transform 0.5s ease;
   }
-  .exp-card:hover .exp-num { color: rgba(201,168,76,0.12); }
+  .exp-card:hover::after { transform: scaleX(1); }
   .exp-icon {
-    width: 48px;
-    height: 48px;
-    border: 1px solid rgba(201,168,76,0.3);
+    width: 52px;
+    height: 52px;
+    background: rgba(201,168,76,0.06);
+    border: 1px solid rgba(201,168,76,0.15);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 32px;
-    transition: border-color 0.3s, background 0.3s;
+    margin-bottom: 28px;
+    border-radius: 50%;
+    transition: border-color 0.3s, background 0.3s, transform 0.3s;
+    flex-shrink: 0;
   }
   .exp-card:hover .exp-icon {
     border-color: var(--gold);
-    background: rgba(201,168,76,0.08);
+    background: rgba(201,168,76,0.12);
+    transform: scale(1.05);
   }
-  .exp-icon svg { width: 22px; height: 22px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+  .exp-icon svg {
+    width: 22px; height: 22px;
+    stroke: var(--gold);
+    fill: none;
+    stroke-width: 1.5;
+    transition: stroke 0.3s;
+  }
+  .exp-card:hover .exp-icon svg { stroke: var(--gold-light); }
   .exp-name {
     font-family: var(--font-display);
-    font-size: 26px;
+    font-size: 24px;
     font-weight: 400;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     color: var(--white);
+    letter-spacing: 0.01em;
   }
   .exp-desc {
     font-size: 13px;
     line-height: 1.8;
     color: rgba(250,250,248,0.45);
+    flex-grow: 1;
   }
   .exp-link {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
-    margin-top: 32px;
+    gap: 8px;
+    margin-top: 28px;
     font-size: 9px;
-    letter-spacing: 0.25em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--gold);
     text-decoration: none;
-    opacity: 0;
-    transform: translateY(6px);
-    transition: opacity 0.3s, transform 0.3s;
+    transition: gap 0.3s, color 0.3s;
+    width: fit-content;
   }
   .exp-link::after {
     content: '→';
-    font-size: 14px;
+    font-size: 13px;
+    transition: transform 0.3s;
   }
-  .exp-card:hover .exp-link { opacity: 1; transform: translateY(0); }
+  .exp-card:hover .exp-link { gap: 14px; }
+  .exp-card:hover .exp-link::after { transform: translateX(2px); }
 
   /* ─── MENU SECTION ─── */
   .menu-section { max-width: 1300px; margin: 0 auto; }
@@ -739,12 +777,12 @@
     border: 1px solid var(--black-border);
     border-bottom-color: rgba(201,168,76,0.2);
     color: var(--white);
-    padding: 14px 0;
+    padding: 14px 16px;
     font-family: var(--font-body);
     font-size: 13px;
     outline: none;
     transition: border-color 0.3s;
-    border-radius: 0;
+    border-radius: 8px;
     -webkit-appearance: none;
     appearance: none;
     
@@ -752,6 +790,7 @@
   .form-group input:focus,
   .form-group select:focus,
   .form-group textarea:focus {
+    border-color: rgba(201,168,76,0.3);
     border-bottom-color: var(--gold);
     background: rgba(201,168,76,0.03);
   }
@@ -919,6 +958,7 @@
     text-decoration: none;
     font-size: 12px;
     transition: border-color 0.3s, color 0.3s;
+    border-radius: 8px;
   }
   .footer-social a:hover { border-color: var(--gold); color: var(--gold); }
   .footer-col-title {
@@ -1211,10 +1251,10 @@
   <div class="experiences-header reveal">
     <div class="section-label" style="justify-content:center">What We Offer</div>
     <h2 class="experiences-title">Curated <em>Experiences</em><br>Like No Other</h2>
+    <p class="exp-sub">From our kitchen to the dance floor — every moment at Jyde Lounge is designed to captivate, indulge, and inspire.</p>
   </div>
   <div class="exp-grid">
     <div class="exp-card reveal">
-      <span class="exp-num">01</span>
       <div class="exp-icon">
         <svg viewBox="0 0 24 24"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
       </div>
@@ -1223,7 +1263,6 @@
       <a href="#menu" class="exp-link">View Menu</a>
     </div>
     <div class="exp-card reveal" style="transition-delay:0.1s">
-      <span class="exp-num">02</span>
       <div class="exp-icon">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
       </div>
@@ -1232,7 +1271,6 @@
       <a href="#" class="exp-link">Learn More</a>
     </div>
     <div class="exp-card reveal" style="transition-delay:0.2s">
-      <span class="exp-num">03</span>
       <div class="exp-icon">
         <svg viewBox="0 0 24 24"><path d="M8 22H5a2 2 0 01-2-2V6l3-3h13a2 2 0 012 2v4"/><path d="M8 22V6M3 9h5"/><path d="M16 16c0 2.5-2 4-4 4"/><circle cx="18" cy="18" r="4"/><path d="M18 16v2l1 1"/></svg>
       </div>
@@ -1241,7 +1279,6 @@
       <a href="#menu" class="exp-link">View Drinks</a>
     </div>
     <div class="exp-card reveal" style="transition-delay:0.05s">
-      <span class="exp-num">04</span>
       <div class="exp-icon">
         <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
       </div>
@@ -1250,7 +1287,6 @@
       <a href="#reservation" class="exp-link">Book an Event</a>
     </div>
     <div class="exp-card reveal" style="transition-delay:0.15s">
-      <span class="exp-num">05</span>
       <div class="exp-icon">
         <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
       </div>
@@ -1259,7 +1295,6 @@
       <a href="#" class="exp-link">See Events</a>
     </div>
     <div class="exp-card reveal" style="transition-delay:0.25s">
-      <span class="exp-num">06</span>
       <div class="exp-icon">
         <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
       </div>
@@ -1442,13 +1477,13 @@
       <div class="footer-col-title">Newsletter</div>
       <p style="font-size:13px; color:var(--muted); line-height:1.8; margin-bottom:20px;">Subscribe and receive 10% off your next order.</p>
       <div>
-        <input type="email" placeholder="Your email address" style="width:100%; background:rgba(255,255,255,0.03); border:1px solid var(--black-border); border-bottom-color:rgba(201,168,76,0.3); color:var(--white); padding:14px 0; font-family:var(--font-body); font-size:13px; outline:none; margin-bottom:12px;">
+        <input type="email" placeholder="Your email address" style="width:100%; background:rgba(255,255,255,0.03); border:1px solid var(--black-border); border-bottom-color:rgba(201,168,76,0.3); color:var(--white); padding:14px 16px; font-family:var(--font-body); font-size:13px; outline:none; margin-bottom:12px; border-radius:8px;">
         <button onclick="this.textContent='Subscribed ✦'; this.style.background='#0a0802'; this.style.color='var(--gold)'; this.style.border='1px solid var(--gold)'" style="width:100%; padding:14px; background:var(--gold); color:var(--black); font-family:var(--font-body); font-size:10px; letter-spacing:0.2em; text-transform:uppercase; border:none; border-radius:50px; cursor:pointer; transition:background 0.3s; font-weight:500;">Subscribe</button>
       </div>
     </div>
   </div>
   <div class="footer-bottom">
-    <div class="footer-copy">© 2025 Jyde Lounge. All rights reserved.</div>
+    <div class="footer-copy">© 2026 Jyde Lounge. All rights reserved.</div>
     <div class="footer-legal">
       <a href="#">Terms & Conditions</a>
       <a href="#">Privacy Policy</a>
